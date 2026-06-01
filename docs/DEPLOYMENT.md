@@ -27,7 +27,7 @@ We will deploy the FastAPI backend to [Render's](https://render.com) free tier W
    - **Root Directory**: `apps/api` (Leave blank if you prefer, but it's cleaner to specify. If left blank, you must adjust the commands below).
    - **Environment**: Python 3
    - **Build Command**: `pip install -r apps/api/requirements.txt` (or just `pip install -r requirements.txt` if Root Directory is `apps/api`).
-   - **Start Command**: `cd apps/api && uvicorn app.main:app --host 0.0.0.0 --port $PORT` (or `uvicorn app.main:app --host 0.0.0.0 --port $PORT` if Root Directory is set).
+   - **Start Command**: `cd apps/api && python -m uvicorn app.main:app --host 0.0.0.0 --port $PORT` (or `python -m uvicorn app.main:app --host 0.0.0.0 --port $PORT` if Root Directory is set).
 5. **Environment Variables**:
    Add the following under the Advanced section:
    - `DATABASE_URL`: Your Supabase/Neon connection string (ensure it uses `postgresql://`).
