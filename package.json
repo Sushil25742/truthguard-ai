@@ -1,0 +1,14 @@
+{
+  "name": "truthguard-ai",
+  "version": "1.0.0",
+  "description": "TruthGuard AI Monorepo",
+  "private": true,
+  "scripts": {
+    "test:backend": "cd apps/api && pytest",
+    "test:frontend": "cd apps/web && npm test",
+    "test": "npm run test:backend && npm run test:frontend",
+    "lint": "cd apps/web && npm run lint",
+    "typecheck": "cd apps/web && npx tsc --noEmit",
+    "build": "cd apps/web && npm run build"
+  }
+}

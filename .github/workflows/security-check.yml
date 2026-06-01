@@ -1,0 +1,34 @@
+name: Security Check
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  schedule:
+    - cron: '0 0 * * 0' # Run weekly on Sundays
+
+jobs:
+  security-audit:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Run TruffleHog (Secrets Scanning)
+      uses: trufflesecurity/trufflehog@main
+      with:
+        path: ./
+        base: ${{ github.event.repository.default_branch }}
+        head: HEAD
+        extra_args: --debug --only-verified
+
+    - name: NPM Audit Reminder (Frontend)
+      run: |
+        echo "Running npm audit in apps/web..."
+        cd apps/web && npm audit || echo "Found vulnerabilities in npm packages. Please review them."
+
+    - name: Pip Audit Reminder (Backend)
+      run: |
+        echo "Please ensure you run pip-audit locally or via a separate CI tool to check Python dependencies."
+        # pip install pip-audit
+        # pip-audit -r apps/api/requirements.txt
